@@ -3,16 +3,28 @@
 This project briefly explains the business model of a new cryptocurrency being created at Intelligent Enterprise Lab for a purpose of adding comfortability for college stakeholders in transferring, exchanging or simply buying/selling any goods between each other using Smart contracts. It describes the parties involved in the university environment and their interest in adapting the new cryptocurrency.
 ## Stakeholders
 * Undergraduate students
-* Donors
-* Contributions from great minds across the globe
-* IT Community
-* Wallets
+* Graduate students
+* Faculty members
+* Staff
+* UNIST itself
+* Service providers
+  * Washing machine in dormitories
+  * Lockers at Gym and Library
+  * Certificate printing machines at Library and Main Administration Building
+  * All printers on campus
+* Third parties
+  * Cafeteria
+  * Cafes and Coffeeshops
+  * Bank
 
 ## Key Activities
-* R&D
-* Software Development
-* Community 
-* Bugs
+
+### Transferring cryptocurrency
+All the students of UNIST will be able to transfer cryptocurrency to each other. Sometimes people may forget about the loan they have taken from somebody. In order to avoid this kind of situations, people might deploy Smart contracts
+to set a specific time and the amount of cryptocurrency to be transferred. It will automatically send the cryptocurrency according to the conditions stipulated in the contract.
+
+### Exchanging goods
+
 * Operations
 * Maintenance
 * Testing
