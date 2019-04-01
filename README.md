@@ -1,20 +1,22 @@
-## Key Partners
-Community members (owners and stakeholders)
-Developers
-Donors
-Contributions from great minds across the globe
-IT Community
-Wallets
+# Business Model for a New Cryptocurrency - UCoin
+## Description
+This project briefly explains the business model of a new cryptocurrency being created at Intelligent Enterprise Lab for a purpose of adding comfortability for college stakeholders in transferring, exchanging or simply buying/selling any goods between each other using Smart contracts. It describes the parties involved in the university environment and their interest in adapting the new cryptocurrency.
+## Stakeholders
+* Undergraduate students
+* Donors
+* Contributions from great minds across the globe
+* IT Community
+* Wallets
 
 ## Key Activities
-R&D
-Software Development
-Community 
-Bugs
-Operations
-Maintenance
-Testing
-Inspection and Certification Services
+* R&D
+* Software Development
+* Community 
+* Bugs
+* Operations
+* Maintenance
+* Testing
+* Inspection and Certification Services
 
 ## Key Resources
 Blockchain app platform
