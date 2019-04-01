@@ -1,4 +1,4 @@
-# Business Model for a New Cryptocurrency - UCoin
+# Business Model for a New Cryptocurrency - U-Coin
 ## Description
 This project briefly explains the business model of a new cryptocurrency being created at Intelligent Enterprise Lab for a purpose of adding comfortability for college stakeholders in transferring, exchanging or simply buying/selling any goods between each other using Smart contracts. It describes the parties involved in the university environment and their interest in adapting the new cryptocurrency.
 ## Stakeholders
@@ -20,15 +20,13 @@ This project briefly explains the business model of a new cryptocurrency being c
 ## Key Activities
 
 ### Transferring cryptocurrency
-All the students of UNIST will be able to transfer cryptocurrency to each other. Sometimes people may forget about the loan they have taken from somebody. In order to avoid this kind of situations, people might deploy Smart contracts
-to set a specific time and the amount of cryptocurrency to be transferred. It will automatically send the cryptocurrency according to the conditions stipulated in the contract.
+All the students of UNIST will be able to transfer cryptocurrency to each other through an app with user-friendly interface that will be built specifically for UNIST students. Sometimes people may forget about the loan they have taken from somebody and in order to avoid this kind of situations, people might deploy Smart contracts to set a specific time and the amount of cryptocurrency to be transferred. It will automatically send the cryptocurrency according to the conditions stipulated in the contract.
 
-### Exchanging goods
+### Exchanging or Selling/Buying goods
+Very often students exchange books or any kind of goods between each other, especially, at the beginning of each semester. Many times people may find themself buying books that might be in a bad condition and they may want to return it back to the initial owner, but since the money has already been given to the seller, it might be inappropriate to ask him about it. Therefore, we can use the power of Smart contracts to resolve this issue by stipulating the conditions of a contract stating that cryptocurrency should be transferred only if buyer checks the condition and is satisfied. The same procedure can be extended to any other goods.   
 
-* Operations
-* Maintenance
-* Testing
-* Inspection and Certification Services
+### Paying for services
+
 
 ## Key Resources
 Blockchain app platform
