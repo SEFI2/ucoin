@@ -2,31 +2,23 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-class App extends Component {
-	state = { loading: true, drizzleState: null }
-	
-	componentDidMount() {
-		const { drizzle } = this.props;
-		this.unsubscribe = drizzle.store.subscribe(() => {
-			const drizzleState = drizzle.store.getState()
-			if (drizzleState.drizzleStatus.initialized) {
-				this.setState( { loading: false, drizzleState } )
-			}
-		})
-	}
-	componentWillUnmount() {
-		this.unsubscribe()
-	}
-	
-	render() {
-		if (this.state.loading)
-				return "Loading Drizzle..."
+import drizzleOptions from './drizzleOptions'
+import MyContainer from './MyContainer' 
 
-    return (
-      <div className="App">
-      
-		  </div>
-    );
+import { DrizzleProvider } from 'drizzle-react'
+import { LoadingContainer } from 'drizzle-react-components'
+
+
+
+class App extends Component {
+	render() {
+	    return (
+			<DrizzleProvider options={drizzleOptions}>
+				<LoadingContainer>
+					<MyContainer />
+				</LoadingContainer>
+			</DrizzleProvider>
+		);
   }
 }
 
