@@ -6,10 +6,10 @@ Implements EIP20 token standard: https://github.com/ethereum/EIPs/blob/master/EI
 pragma solidity ^0.5.0;
 
 
-import "./EIP20Interface.sol";
+import "./eip20/EIP20Interface.sol";
 
 
-contract EIP20 is EIP20Interface {
+contract UCoin is EIP20Interface {
 
     uint256 constant private MAX_UINT256 = 2**256 - 1;
     mapping (address => uint256) public balances;

@@ -1,5 +1,5 @@
-const EIP20 = artifacts.require('./EIP20.sol');
+const UCoin = artifacts.require('./UCoin.sol');
 
 module.exports = (deployer) => {
-  deployer.deploy(EIP20, 10000, 'Simon Bucks', 1, 'SBX');
+  deployer.deploy(UCoin, 10000, 'Simon Bucks', 1, 'SBX');
 };

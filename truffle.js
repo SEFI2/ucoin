@@ -12,8 +12,10 @@ if (fs.existsSync('secrets.json')) {
               'this will fail. Otherwise, you can ignore this message!')
   mnemonic = ''
 }
+const path = require('path')
 
 module.exports = {
+  contracts_build_directory: path.join(__dirname, "frontend/src/contracts"),
   networks: {
     live: {
       network_id: 1 // Ethereum public network
