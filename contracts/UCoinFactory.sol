@@ -11,7 +11,7 @@ contract UCoinFactory {
 
     constructor () public {
         //upon creation of the factory, deploy a EIP20 (parameters are meaningless) and store the bytecode provably.
-        address verifiedToken = createUCoin(10000, "Verify Token", 3, "VTX");
+        address verifiedToken = createUCoin(10000, "Verify Token", 3, "UCoin");
         UCoinByteCode = codeAt(verifiedToken);
     }
 
