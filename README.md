@@ -52,17 +52,15 @@ Aside from transferring and exchanging crypto tokens, it can also be used to pay
 ### Other features
 Aside from what was mentioned before, the app through through which all transactions take place can also be used for checking the attendance in class. Your portal username and password will be the same username and password for logging into the app. All the activities in UNIST can be done through a single platform. 
 
-## How 
-
+## How crypto token can be purchased or earned?
+Like any other currency, crypto token can be purchased from the bank for which you have to pay a small commission fee. One unit of token will be equivalent to the minimum wage in South Korea. These days it is 8,350 KRW. The logic behind it will be related to the Academic Units (AU). You can read more about it in section ...
+Another way of getting crypto tokens is participating in a leadership programs, doing voluntary jobs or tutoring a subject you are good to other students. This notion was taken from the "Time Banking", where people help or provide some services to other individuals in exchange for complementary currency.
 
 ## Key Resources
-Blockchain app platform
-Ethereum Wallet
-Solidity - a new language for smart contracts
-Gas
-An internal transaction pricing mechanism
-Multiple open-source licences
-Community
+- Blockchain app platform
+- Ethereum Wallet
+- An internal transaction pricing mechanism
+- Community
 
 ## Value Propositions
 A true technological revolution that's potentially more important than the internet itself(to create markets, Store registries
