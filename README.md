@@ -69,6 +69,7 @@ Aside from what was mentioned before, the app through through which all transact
 ## Circulation of Crypto Token
 
 
+
 ## Customer Relationships
 The touted "power and network effect" of a decentralized asset exchange
 Radical transparency
