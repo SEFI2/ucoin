@@ -53,50 +53,33 @@ Aside from transferring and exchanging crypto tokens, it can also be used to pay
 Aside from what was mentioned before, the app through through which all transactions take place can also be used for checking the attendance in class. Your portal username and password will be the same username and password for logging into the app. All the activities in UNIST can be done through a single platform. 
 
 ## How crypto token can be purchased or earned?
-Like any other currency, crypto token can be purchased from the bank for which you have to pay a small commission fee. One unit of token will be equivalent to the minimum wage in South Korea. These days it is 8,350 KRW. The logic behind it will be related to the Academic Units (AU). You can read more about it in section ...
-Another way of getting crypto tokens is participating in a leadership programs, doing voluntary jobs or tutoring a subject you are good to other students. This notion was taken from the "Time Banking", where people help or provide some services to other individuals in exchange for complementary currency.
+- Banks: Like any other currency, crypto token can be purchased from the bank for which you have to pay a small commission fee. One unit of token will be equivalent to the minimum wage in South Korea. These days it is 8,350 KRW. The logic behind it will be related to the Academic Units (AU). You can read more about it in section ...
+- Leadership Programs: Another way of getting crypto tokens is participating in leadership programs offered by Leadership Center
+- Voluntary Jobs: Going to an orphanage or elderly home, helping staff of UNIST to organize events, and many other activities can be rewarded with crypto tokens
+- Tutoring: Teaching is the best way to learn. It's a historically proven fact. Tutor other students and get paid for it.
+- Parliament of UNIST: Working as a part of a parliament and contribute to the well-beings of UNISTars is also another way to earn crypto tokens.
+- Provide service to other students: If you know what you are good at, you may start helping others in exchange for crypto tokens. This notion was taken from the __"Time Banking"__, where people help or provide some services to other individuals in exchange for complementary currency.
 
 ## Key Resources
-- Blockchain app platform
-- Ethereum Wallet
-- An internal transaction pricing mechanism
-- Community
+- __Blockchain app platform__: an app with user-friendly interface through which crypto tokens will be managed
+- __Ethereum Wallet__: a personal wallet that will keep private and public key of each individual
+- __An internal transaction pricing mechanism__: 
+- __Community__: all stakeholders involved in the environment
 
-## Value Propositions
-A true technological revolution that's potentially more important than the internet itself(to create markets, Store registries
-of debts or promises, Move funds in accordance with instructions given long in the past and many other things that have not 
-been invented yet)
-Ethereum is the next generation of blockchain technology that allows Smart contracts to be easily deployed
-and interacted with
-Kickstart a project with a trustless crowd sale
-Create a demogratic autonomous organization
+## Circulation of Crypto Token
+
 
 ## Customer Relationships
-Democratization of investment industry
 The touted "power and network effect" of a decentralized asset exchange
 Radical transparency
-Design and issue your own currency
-Disintermediation and optimization of nearly every kind of social interaction
-Without a middle man or counterparty risk
 Automation
 Self-service
 Co-creation 
 Community
 
 ## Channels
-Website 
+Portal Website 
 Social Network
-Developer tools
-API
-Wiki
-Press
-
-## Customer Segments
-IT Community
-Developers
-Cryptocurrency community
-Enterprise software companies
-Permissioned ledgers
 
 ## Cost Structure
 R&D
@@ -110,6 +93,4 @@ Bugs
 Power
 Infrastructure
 
-## Revenue Streams
-Donations
 
