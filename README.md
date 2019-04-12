@@ -95,3 +95,5 @@ Power
 Infrastructure
 
 
+Presentation:
+https://docs.google.com/presentation/d/10JWjZSwYTsUisakaFy3vSeGdN3ndCeR-JzDUqQLfXV4/edit#slide=id.g5102740e20_0_120
