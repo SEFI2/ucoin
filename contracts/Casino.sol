@@ -2,9 +2,8 @@
 
 pragma solidity ^0.5.0;
 
-import "../ethereum-api/oraclizeAPI_0.5.sol";
+import "./oraclize/oraclizeAPI.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
-import "./UCoin.sol";
 
 
 
@@ -26,7 +25,7 @@ contract Casino is usingOraclize {
 	uint256 totalValue;
 
 	constructor () public {
-		oraclize_setProof(proofType_Ledger);		
+		//oraclize_setProof(proofType_Ledger);		
 	}
 	
 	
