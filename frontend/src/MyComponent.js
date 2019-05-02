@@ -5,7 +5,6 @@ import {
 	ContractData,
 	ContractForm
 } from 'drizzle-react-components'
-class 
 
 
 export default ({ accounts }) => (

@@ -18,8 +18,7 @@
       ],
       "payable": false,
       "stateMutability": "view",
-      "type": "function",
-      "signature": "0x0dd5f3d2"
+      "type": "function"
     },
     {
       "constant": true,
@@ -42,8 +41,7 @@
       ],
       "payable": false,
       "stateMutability": "view",
-      "type": "function",
-      "signature": "0x5f8dead3"
+      "type": "function"
     },
     {
       "constant": true,
@@ -57,15 +55,13 @@
       ],
       "payable": false,
       "stateMutability": "view",
-      "type": "function",
-      "signature": "0xbee1c52c"
+      "type": "function"
     },
     {
       "inputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "constructor",
-      "signature": "constructor"
+      "type": "constructor"
     },
     {
       "constant": true,
@@ -84,8 +80,7 @@
       ],
       "payable": false,
       "stateMutability": "view",
-      "type": "function",
-      "signature": "0x488d8b24"
+      "type": "function"
     },
     {
       "constant": false,
@@ -116,8 +111,7 @@
       ],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function",
-      "signature": "0xead4e4e0"
+      "type": "function"
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.5.0+commit.1d4f565a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"}],\"name\":\"isUCoin\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_tokenContract\",\"type\":\"address\"}],\"name\":\"verifyUCoin\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"},{\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"created\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"UCoinByteCode\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_initialAmount\",\"type\":\"uint256\"},{\"name\":\"_name\",\"type\":\"string\"},{\"name\":\"_decimals\",\"type\":\"uint8\"},{\"name\":\"_symbol\",\"type\":\"string\"}],\"name\":\"createUCoin\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/unicss/Desktop/blockchain/ucoin/contracts/UCoinFactory.sol\":\"UCoinFactory\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/unicss/Desktop/blockchain/ucoin/contracts/UCoin.sol\":{\"keccak256\":\"0x1fd2ec4edc2f4d607dfa656aa3cf796be91e71500679157d0562167933f47ed0\",\"urls\":[\"bzzr://ef19d6e61d056d82438030cd628bbaff5504130254a4fcadb97908200eb82457\"]},\"/home/unicss/Desktop/blockchain/ucoin/contracts/UCoinFactory.sol\":{\"keccak256\":\"0x92eeb89bce02666cd202f2f6692a75294ae8d923f954fe83bc01937a6e13d595\",\"urls\":[\"bzzr://d4fa70a867818a913e4ec82cda562b0640dbcf9e62a391cf6df01ab703c98fe0\"]},\"/home/unicss/Desktop/blockchain/ucoin/contracts/eip20/EIP20Interface.sol\":{\"keccak256\":\"0x53b28f035f03b3865d2bc87c84a9dd2a16ecdd2223d71c4630042aca1f602880\",\"urls\":[\"bzzr://56f522b44884e7b1f2ab89caa2e7c4a3823b236620a108c6ab150e4f24b708ad\"]}},\"version\":1}",
@@ -4084,7 +4078,7 @@
     }
   },
   "schemaVersion": "3.0.6",
-  "updatedAt": "2019-04-02T06:34:20.351Z",
+  "updatedAt": "2019-04-25T13:12:13.452Z",
   "devdoc": {
     "methods": {}
   },
