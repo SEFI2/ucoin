@@ -4,151 +4,217 @@ pragma solidity ^0.5.0;
 
 import "./oraclize/oraclizeAPI.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
+import "./UCoin.sol";
 
 
 
 contract GroupEval is usingOraclize {
 	using SafeMath for uint256;
 
-		
+	UCoin ucoin;
+
+	mapping (uint => Group) groupTable;
+	uint groupIDCounter = 0;
+
+
+	constructor (address ucoinAddress) public {
+		ucoin = UCoin(ucoinAddress);
+	}
+
 	enum State { 
 			Available, 
 			Deposit,
 			Evaluation
 	}
-	
-	struct Student {
+		
+	struct Member {
 		string name;
-		uint points;
 		address addr;
+		uint receivedPoints;
+		uint sentPoints;
 	}
 
-
-	State public state;
-
-	Student [] studentsList;
-	address groupLeader;
-
-	uint256 totalValue;
-	uint256 depositAmount;
-	uint256 totalPoints;
-
-	
-	mapping (address => bool) voted;
-	mapping (address => bool) member;
-
-	
-	
-	constructor () public {
+	struct Group {
+		State state;
+		address groupLeader;
+		Member [] memberList; 
+		uint256 depositAmount;
+		uint totalPoints;
+		bool exists;
 	}
-	
-	
-	modifier ifAvailableState { 
-		require (state == State.Available);
+
+		
+	modifier ifGroupExists (uint groupID) {
+		require (groupTable[groupID].exists == false);
 		_;
 	}
-
-	modifier ifDepositState {
-		require (state == State.Deposit);
-		_;	
-	}
-
-	modifier ifEvaluationState {
-		require (state == State.Evaluation);
+	modifier ifGroupLeader(uint groupID) {
+		require (groupTable[groupID].groupLeader == msg.sender);
 		_;
 	}
-
-	modifier checkDeposit (uint256 amount) {
-		require (amount == depositAmount);
+	modifier ifAvailableState (uint groupID) {
+		require (groupTable[groupID].exists == false);
 		_;
 	}
-	
-	modifier ifLeader {
-		require(msg.sender == groupLeader);
+	modifier ifDepositState(uint groupID) {
+		require (groupTable[groupID].state == State.Deposit);
+		_;
+	}
+	modifier ifEvaluationState(uint groupID) {
+		require (groupTable[groupID].state == State.Evaluation);
 		_;
 	}
 
 
+	function sendToken(address user, uint256 val) 
+		private returns (bool) {
+		return true;
+	}
+	
+	function receiveToken(address user, uint256 val) 
+		private returns (bool) {
+		return true;
+	}
+
+	function getBalance(address user) 
+		private returns (uint256) {
+		return 0;	
+	}
 
 
+	function registerMember(string memory name, uint groupID) 
+		private returns (bool) {
+		Group storage g = groupTable[groupID];
+		
+		require (getBalance(msg.sender) >= g.depositAmount);
+		require(receiveToken(msg.sender, g.depositAmount));
+		require (findStudentName(g, name) == -1);
 
+		Member memory member = Member(name, msg.sender, 0, 0);
+		g.memberList.push(member);		
+	
+		//emit memberRegistered(name, msg.sender);
+	
+		return true;
+	}	
 
-	function startEvaluation(uint256 amount) 
+	function generateGroupID () 
+		private returns (uint) {
+		return groupIDCounter ++;
+	}
+
+	function initEvaluation(uint256 amount, string memory name) 
 		public
-		ifAvailableState 
+		ifAvailableState
 	{	
-		groupLeader = msg.sender;
-		depositAmount = amount;
-		state = State.Deposit;
+		require (getBalance(msg.sender) >= amount);
+
+		uint groupID = generateGroupID();
+		
+		Group memory g;
+		g.groupLeader = msg.sender;
+		g.depositAmount = amount;
+		g.state = State.Deposit;
+		g.exists = true;
+		groupTable[groupID] = g;
+		
+		require(registerMember(groupID, name));	
+		
+		// emit signalGroupID(groupID);	
 	}
-
-
-
-	function deposit(uint256 value, string memory name)
+	
+	
+	function deposit(uint groupID, string memory name)
 		public	
-		ifDepositState
-		checkDeposit(value)
-
+		ifGroupExists(groupID)
+		ifGroupLeader(groupID)
+		ifDepositState(groupID)
 	{
-		totalValue = totalValue.add(value);
-		Student memory st = Student(value, name, msg.sender);
-		studentsList.push(st);			
-		member[msg.sender] = true;
+		require (registerMember(groupID, name));		
 	}
 	
 
 
-	function closeDeposit() 
+	function closeDeposit(uint groupID) 
 		public 
-		ifLeader
-		ifDepositState
-
+		ifGroupExists(groupID)
+		ifGroupLeader(groupID)
+		ifDepositState (groupID)
 	{
-		state = State.Evaluation;
+		
+		Group memory g = groupTable[groupID];
+		g.state = State.Evaluation;
+		// specify the max amount of points that a group member can use
+		g.maxPointsToUse = g.memberList.length;
+		// emit signalMaxPoints(g.maxPointsToUse);
 	}
 
 
-	function findStudent (string memory name)
-   		public		
-		returns (int) 
-	{
-		for (int i = 0 ; i < studentsList.length ; ++i) {
-			if (studentsList[i].name == name) { 
+	function findStudentName (Group memory g, string memory name)
+   		private		
+		returns (int) {
+		for (int i = 0 ; i < g.memberList.length ; ++i) {
+			if (g.memberList[i].name == name) { 
 				return i;
 			}	
 		}
 		return -1;
 	}
 
-	function evaluate(uint points, string memory name) 
+	function findStudentAddress(Group memory g, address addr) 
+		private 
+		returns (int) {
+		for (int i = 0 ; i < g.memberList.length ; ++i) {
+			if (g.memberList[i].addr == addr) { 
+				return i;
+			}	
+		}
+		return -1;
+	}
+
+	function evaluate(uint groupID, uint points, string memory name) 
 		public	
-		ifEvaluationState
+		ifGroupExists(groupID)
+		ifEvaluationState(groupID)
 	{
-		require(member[msg.sender] == false);
-		require(points < 10);
-		int studentIdx = findStudent(name);
-		require(studentIdx != -1);
-		Student memory s = studentsList[studentIdx];
 
-		require (voted[msg.sender][s.addr] == false);
+		Group memory g = groupTable[groupID];
 		
-		studentsList[studentIdx].points = s.points.add(points);
-		totalPoints = totalPoints.add(points);
+		// check if sender is registered to group
+		int pointsSenderIdx = findStudentAddress(g, msg.sender);	
+		require(pointsSenderIdx != -1);	
+		Member memory pointsSender = g.studentsList[pointsSenderIdx];
 
-		voted[msg.sender][s.addr] = true;
+		// check if the sender of points can sent
+		// requested amount of points
+		require(points + pointsSender.sentPoints < g.maxPointsToUse);
+		
+		// check if the receiver exists with given name
+		int pointsReceiverIdx = findStudentName(g, name);
+		require(pointsReceiverIdx != -1);
+		Member memory pointsReceiver = g.studentsList[pointsReceiverIdx];
+		
+
+		pointsReceiver.points += points;
+		g.totalPoints += points;
 	} 
 
-	function endEvaluation()
+
+	function endEvaluation(uint groupID)
 		public 
-		ifLeader
-		ifEvaluationState
+		ifGroupExists(groupID)
+		ifGroupLeader(groupID)
+		ifEvaluationState(groupID)
 	{
-			
-		for (uint i = 0 ; i < studentsList.length ; ++i) {
-			uint256 amountToReceive = totalValue.mul(studentsList[i].points).div(totalPoints);
-			// _transfer (studentsList[i].addr, amountToReceive);
-		}
-		state = State.Available;
+		Group memory g = groupTable[groupID];
+		
+		for (int i = 0 ; i < g.memberList.length ; ++i) {
+			sendToken(g.memberList[i].addr, g.depositAmount); 
+		}	
+		
+		delete groupTable[groupID];
+
+		g.state = State.Available;
 	}	
 }
 
