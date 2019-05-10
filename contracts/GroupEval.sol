@@ -15,7 +15,7 @@ contract GroupEval is usingOraclize {
 
 	mapping (uint => Group) groupTable;
 	uint groupIDCounter = 0;
-
+	uint256 MIN_DEPOSIT_AMOUNT = 10;
 
 	constructor (address ucoinAddress) public {
 		ucoin = UCoin(ucoinAddress);
@@ -39,6 +39,7 @@ contract GroupEval is usingOraclize {
 		address groupLeader;
 		Member [] memberList; 
 		uint256 depositAmount;
+		uint maxPointsToUse;
 		uint totalPoints;
 		bool exists;
 	}
@@ -52,10 +53,8 @@ contract GroupEval is usingOraclize {
 		require (groupTable[groupID].groupLeader == msg.sender);
 		_;
 	}
-	modifier ifAvailableState (uint groupID) {
-		require (groupTable[groupID].exists == false);
-		_;
-	}
+
+
 	modifier ifDepositState(uint groupID) {
 		require (groupTable[groupID].state == State.Deposit);
 		_;
@@ -82,7 +81,7 @@ contract GroupEval is usingOraclize {
 	}
 
 
-	function registerMember(string memory name, uint groupID) 
+	function registerMember(uint groupID, string memory name) 
 		private returns (bool) {
 		Group storage g = groupTable[groupID];
 		
@@ -105,12 +104,12 @@ contract GroupEval is usingOraclize {
 
 	function initEvaluation(uint256 amount, string memory name) 
 		public
-		ifAvailableState
 	{	
+		require(amount > MIN_DEPOSIT_AMOUNT);
 		require (getBalance(msg.sender) >= amount);
 
 		uint groupID = generateGroupID();
-		
+			
 		Group memory g;
 		g.groupLeader = msg.sender;
 		g.depositAmount = amount;
@@ -154,7 +153,7 @@ contract GroupEval is usingOraclize {
    		private		
 		returns (int) {
 		for (int i = 0 ; i < g.memberList.length ; ++i) {
-			if (g.memberList[i].name == name) { 
+			if (g.memberList[uint(i)].name == name) { 
 				return i;
 			}	
 		}
@@ -165,7 +164,7 @@ contract GroupEval is usingOraclize {
 		private 
 		returns (int) {
 		for (int i = 0 ; i < g.memberList.length ; ++i) {
-			if (g.memberList[i].addr == addr) { 
+			if (g.memberList[uint(i)].addr == addr) { 
 				return i;
 			}	
 		}
@@ -183,7 +182,7 @@ contract GroupEval is usingOraclize {
 		// check if sender is registered to group
 		int pointsSenderIdx = findStudentAddress(g, msg.sender);	
 		require(pointsSenderIdx != -1);	
-		Member memory pointsSender = g.studentsList[pointsSenderIdx];
+		Member memory pointsSender = g.memberList[uint(pointsSenderIdx)];
 
 		// check if the sender of points can sent
 		// requested amount of points
@@ -192,7 +191,7 @@ contract GroupEval is usingOraclize {
 		// check if the receiver exists with given name
 		int pointsReceiverIdx = findStudentName(g, name);
 		require(pointsReceiverIdx != -1);
-		Member memory pointsReceiver = g.studentsList[pointsReceiverIdx];
+		Member memory pointsReceiver = g.memberList[uint(pointsReceiverIdx)];
 		
 
 		pointsReceiver.points += points;
