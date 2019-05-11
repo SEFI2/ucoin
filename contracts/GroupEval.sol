@@ -16,8 +16,8 @@ contract GroupEval {
 	uint groupIDCounter = 0;
 	uint256 MIN_DEPOSIT_AMOUNT = 10;
 
-	constructor (address ucoinAddress) public {
-		ucoin = UCoin(ucoinAddress);
+	constructor (/*address ucoinAddress */) public {
+		//ucoin = UCoin(ucoinAddress);
 	}
 
 	enum State { 
@@ -82,14 +82,19 @@ contract GroupEval {
 
 	function getBalance(address user) 
 		private returns (uint256) {
-		return 0;	
+		return 1000000000;	
 	}
+	
+	event memberRegistered(string name, address member);
+	event signalGroupID(uint groupID);
+	event debuggerEvent(string msg);
 
 
 	function registerMember(uint groupID, string memory name) 
 		private returns (bool) {
 		Group storage g = groupTable[groupID];
-		
+		emit debuggerEvent("in register member");
+
 		require (getBalance(msg.sender) >= g.depositAmount);
 		require(receiveToken(msg.sender, g.depositAmount));
 		require (findStudentName(g, name) == -1);
@@ -98,7 +103,7 @@ contract GroupEval {
 		groupTable[groupID].memberList[g.memberCurIdx] = member;
 		g.memberCurIdx ++;		
 	
-		//emit memberRegistered(name, msg.sender);
+		emit memberRegistered(name, msg.sender);
 	
 		return true;
 	}	
@@ -111,6 +116,7 @@ contract GroupEval {
 	function initEvaluation(uint256 amount, string memory name) 
 		public
 	{	
+		emit debuggerEvent("initEvaluation");
 		require(amount > MIN_DEPOSIT_AMOUNT);
 		require (getBalance(msg.sender) >= amount);
 
@@ -125,7 +131,7 @@ contract GroupEval {
 		
 		require(registerMember(groupID, name));	
 		
-		// emit signalGroupID(groupID);	
+		emit signalGroupID(groupID);	
 	}
 	
 	

@@ -1,4 +1,6 @@
 import UCoin from './contracts/UCoin.json'
+import GroupEval from './contracts/GroupEval.json'
+
 
 const options = {
 	web3: {
@@ -8,7 +10,7 @@ const options = {
 			url: 'ws://127.0.0.1:8545',
 		}
 	},
-	contracts: [UCoin],
+	contracts: [UCoin, GroupEval],
 	// TODO: add events (events:)
 	
 	polls: {

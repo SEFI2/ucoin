@@ -6,9 +6,21 @@ import {
 	ContractForm
 } from 'drizzle-react-components'
 
+import InitEvaluation from './InitEvaluationComponent'
+import Deposit from './DepositComponent'
+
 
 export default ({ accounts }) => (
 	<div className='App'>
+		<div className='section'>
+			<h2> InitEvaluation </h2>
+			<InitEvaluation />		
+		</div>
+		<div className='section'>
+			<h2> Deposit </h2>
+			<Deposit />
+		</div>
+
 		<div className='section'>
 			<h2> Active accounts </h2>
 			<AccountData accountIndex='0' units='ether' precision='3' />
