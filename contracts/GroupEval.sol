@@ -2,13 +2,12 @@
 
 pragma solidity ^0.5.0;
 
-import "./oraclize/oraclizeAPI.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "./UCoin.sol";
 
 
 
-contract GroupEval is usingOraclize {
+contract GroupEval {
 	using SafeMath for uint256;
 
 	UCoin ucoin;
@@ -37,13 +36,19 @@ contract GroupEval is usingOraclize {
 	struct Group {
 		State state;
 		address groupLeader;
-		Member [] memberList; 
+		mapping (uint => Member) memberList;
+		uint memberCurIdx;
+
 		uint256 depositAmount;
 		uint maxPointsToUse;
 		uint totalPoints;
 		bool exists;
 	}
 
+    function compareStrings (string memory a, string memory b) 
+	   private pure returns (bool) {
+  		return (keccak256(abi.encodePacked((a))) == keccak256(abi.encodePacked((b))));
+    }
 		
 	modifier ifGroupExists (uint groupID) {
 		require (groupTable[groupID].exists == false);
@@ -90,7 +95,8 @@ contract GroupEval is usingOraclize {
 		require (findStudentName(g, name) == -1);
 
 		Member memory member = Member(name, msg.sender, 0, 0);
-		g.memberList.push(member);		
+		groupTable[groupID].memberList[g.memberCurIdx] = member;
+		g.memberCurIdx ++;		
 	
 		//emit memberRegistered(name, msg.sender);
 	
@@ -141,31 +147,32 @@ contract GroupEval is usingOraclize {
 		ifDepositState (groupID)
 	{
 		
-		Group memory g = groupTable[groupID];
+		Group storage g = groupTable[groupID];
 		g.state = State.Evaluation;
 		// specify the max amount of points that a group member can use
-		g.maxPointsToUse = g.memberList.length;
+		g.maxPointsToUse = g.memberCurIdx;
 		// emit signalMaxPoints(g.maxPointsToUse);
 	}
 
 
-	function findStudentName (Group memory g, string memory name)
+	function findStudentName (Group storage g, string memory name)
    		private		
 		returns (int) {
-		for (int i = 0 ; i < g.memberList.length ; ++i) {
-			if (g.memberList[uint(i)].name == name) { 
-				return i;
+
+		for (uint i = 0 ; i < g.memberCurIdx ; ++i) {
+			if (compareStrings(g.memberList[i].name, name)) { 
+				return int(i);
 			}	
 		}
 		return -1;
 	}
 
-	function findStudentAddress(Group memory g, address addr) 
+	function findStudentAddress(Group storage g, address addr) 
 		private 
 		returns (int) {
-		for (int i = 0 ; i < g.memberList.length ; ++i) {
-			if (g.memberList[uint(i)].addr == addr) { 
-				return i;
+		for (uint i = 0 ; i < g.memberCurIdx ; ++i) {
+			if (g.memberList[i].addr == addr) { 
+				return int(i);
 			}	
 		}
 		return -1;
@@ -177,12 +184,12 @@ contract GroupEval is usingOraclize {
 		ifEvaluationState(groupID)
 	{
 
-		Group memory g = groupTable[groupID];
+		Group storage g = groupTable[groupID];
 		
 		// check if sender is registered to group
 		int pointsSenderIdx = findStudentAddress(g, msg.sender);	
 		require(pointsSenderIdx != -1);	
-		Member memory pointsSender = g.memberList[uint(pointsSenderIdx)];
+		Member storage pointsSender = g.memberList[uint(pointsSenderIdx)];
 
 		// check if the sender of points can sent
 		// requested amount of points
@@ -191,10 +198,11 @@ contract GroupEval is usingOraclize {
 		// check if the receiver exists with given name
 		int pointsReceiverIdx = findStudentName(g, name);
 		require(pointsReceiverIdx != -1);
-		Member memory pointsReceiver = g.memberList[uint(pointsReceiverIdx)];
+		Member storage pointsReceiver = g.memberList[uint(pointsReceiverIdx)];
 		
 
-		pointsReceiver.points += points;
+		pointsSender.sentPoints += points;
+		pointsReceiver.receivedPoints += points;
 		g.totalPoints += points;
 	} 
 
@@ -205,14 +213,16 @@ contract GroupEval is usingOraclize {
 		ifGroupLeader(groupID)
 		ifEvaluationState(groupID)
 	{
-		Group memory g = groupTable[groupID];
+		Group storage g = groupTable[groupID];
 		
-		for (int i = 0 ; i < g.memberList.length ; ++i) {
+		for (uint i = 0 ; i < g.memberCurIdx ; ++i) {
 			sendToken(g.memberList[i].addr, g.depositAmount); 
 		}	
 		
+		for (uint i = 0 ; i < g.memberCurIdx ; ++i) {
+			delete groupTable[groupID].memberList[i];
+		}		
 		delete groupTable[groupID];
-
 		g.state = State.Available;
 	}	
 }
