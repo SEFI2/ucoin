@@ -40,6 +40,11 @@ module.exports = {
       gas: 0xfffffffffff,
       gasPrice: 0x01     
     },
+	ganache: {
+		host: "127.0.0.1",
+		port: "7545",
+		network_id: 5777
+	},
   },
   // Configure your compilers
   compilers: {

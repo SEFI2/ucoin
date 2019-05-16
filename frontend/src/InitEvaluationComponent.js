@@ -10,13 +10,12 @@ class InitEvaluationComponent extends Component {
 		this.handleDepositAmount = this.handleDepositAmount.bind(this)
 		this.handleMemberName = this.handleMemberName.bind(this)
 		this.handleGroupID = this.handleGroupID.bind(this)
-
 		this.contracts = context.drizzle.contracts
 		this.groupEvalContract = this.contracts['GroupEval']
 		this.utils = context.drizzle.web3.utils
 		this.state = {}
 		this.groupID = null;
-		this.groupEvalContract.events.signalGroupID().on('data', this.handleGroupID);
+		this.groupEvalContract.events.announceGroupID().on('data', this.handleGroupID);
 	}
 	
 	handleGroupID(event) {

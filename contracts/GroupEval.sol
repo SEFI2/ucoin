@@ -1,23 +1,39 @@
-
-
-pragma solidity ^0.5.0;
-
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
-import "./UCoin.sol";
-
-
+import './UCoin.sol';
 
 contract GroupEval {
 	using SafeMath for uint256;
 
-	UCoin ucoin;
+	UCoin public ucoin;
+	bool ucoinInit;
+
 
 	mapping (uint => Group) groupTable;
 	uint groupIDCounter = 0;
 	uint256 MIN_DEPOSIT_AMOUNT = 10;
+	address creator;
+	
 
-	constructor (/*address ucoinAddress */) public {
-		//ucoin = UCoin(ucoinAddress);
+	constructor () public {
+		creator = msg.sender;
+	}
+	
+//	constructor(address UCoinAddress) 
+//		public {
+//		ucoin = UCoin(UCoinAddress);
+//		ucoinInit = true;
+//	}
+
+	modifier onlyCreator {
+		require (msg.sender == creator);
+		_;
+	}
+
+	function initUCoinAddress(address UCoinAddress) 
+		onlyCreator 
+		public {
+		ucoin = UCoin(UCoinAddress);
+		ucoinInit = true;
 	}
 
 	enum State { 
@@ -49,7 +65,12 @@ contract GroupEval {
 	   private pure returns (bool) {
   		return (keccak256(abi.encodePacked((a))) == keccak256(abi.encodePacked((b))));
     }
-		
+	
+	modifier ifucoinInit {
+		require (ucoinInit == true);
+		_;
+	}	
+
 	modifier ifGroupExists (uint groupID) {
 		require (groupTable[groupID].exists == false);
 		_;
@@ -72,21 +93,21 @@ contract GroupEval {
 
 	function sendToken(address user, uint256 val) 
 		private returns (bool) {
-		return true;
+		return ucoin.transfer(user, val);
 	}
 	
 	function receiveToken(address user, uint256 val) 
 		private returns (bool) {
-		return true;
+		return ucoin.receiveToken(user, val);
 	}
 
 	function getBalance(address user) 
 		private returns (uint256) {
-		return 1000000000;	
+		return ucoin.balanceOf(user);	
 	}
 	
 	event memberRegistered(string name, address member);
-	event signalGroupID(uint groupID);
+	event announceGroupID(uint groupID);
 	event debuggerEvent(string msg);
 
 
@@ -95,9 +116,9 @@ contract GroupEval {
 		Group storage g = groupTable[groupID];
 		emit debuggerEvent("in register member");
 
-		require (getBalance(msg.sender) >= g.depositAmount);
-		require(receiveToken(msg.sender, g.depositAmount));
-		require (findStudentName(g, name) == -1);
+		require (getBalance(msg.sender) >= g.depositAmount, "Balance must be greater than depositAmount");
+		require(receiveToken(msg.sender, g.depositAmount), "Cannot receiveToken");
+		require (findStudentName(g, name) == -1, "Member is already registered");
 
 		Member memory member = Member(name, msg.sender, 0, 0);
 		groupTable[groupID].memberList[g.memberCurIdx] = member;
@@ -115,10 +136,11 @@ contract GroupEval {
 
 	function initEvaluation(uint256 amount, string memory name) 
 		public
+		ifucoinInit
 	{	
 		emit debuggerEvent("initEvaluation");
-		require(amount > MIN_DEPOSIT_AMOUNT);
-		require (getBalance(msg.sender) >= amount);
+		require(amount > MIN_DEPOSIT_AMOUNT, "Required amount is less than MIN_DEPOSIT_AMOUNT");
+		require (getBalance(msg.sender) >= amount, "Balance is less than promised deposit");
 
 		uint groupID = generateGroupID();
 			
@@ -129,9 +151,9 @@ contract GroupEval {
 		g.exists = true;
 		groupTable[groupID] = g;
 		
-		require(registerMember(groupID, name));	
+		require(registerMember(groupID, name), "Cannot register the member");	
 		
-		emit signalGroupID(groupID);	
+		emit announceGroupID(groupID);	
 	}
 	
 	
@@ -162,7 +184,8 @@ contract GroupEval {
 
 
 	function findStudentName (Group storage g, string memory name)
-   		private		
+   		private	
+		view	
 		returns (int) {
 
 		for (uint i = 0 ; i < g.memberCurIdx ; ++i) {
@@ -174,7 +197,8 @@ contract GroupEval {
 	}
 
 	function findStudentAddress(Group storage g, address addr) 
-		private 
+		private
+	    view	
 		returns (int) {
 		for (uint i = 0 ; i < g.memberCurIdx ; ++i) {
 			if (g.memberList[i].addr == addr) { 
@@ -232,38 +256,6 @@ contract GroupEval {
 		g.state = State.Available;
 	}	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
