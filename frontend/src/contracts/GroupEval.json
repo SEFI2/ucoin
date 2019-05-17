@@ -13,15 +13,13 @@
       ],
       "payable": false,
       "stateMutability": "view",
-      "type": "function",
-      "signature": "0x6c5537cf"
+      "type": "function"
     },
     {
       "inputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "constructor",
-      "signature": "constructor"
+      "type": "constructor"
     },
     {
       "anonymous": false,
@@ -38,8 +36,7 @@
         }
       ],
       "name": "memberRegistered",
-      "type": "event",
-      "signature": "0x24b95e040587ef6cec07e692048354eb420a71feaddc46180eaf63e82d6f95ea"
+      "type": "event"
     },
     {
       "anonymous": false,
@@ -51,8 +48,7 @@
         }
       ],
       "name": "announceGroupID",
-      "type": "event",
-      "signature": "0x73543177a7a9b927668d7ddde18b5f21eeb0f3ca1fb790ba81691230d5f42ba6"
+      "type": "event"
     },
     {
       "anonymous": false,
@@ -64,8 +60,7 @@
         }
       ],
       "name": "debuggerEvent",
-      "type": "event",
-      "signature": "0xdfe56d47bf4dbace38b5140f0f99080c69e9f02977fd5751d8c5f0a57b656aef"
+      "type": "event"
     },
     {
       "constant": false,
@@ -79,8 +74,7 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function",
-      "signature": "0x05461aca"
+      "type": "function"
     },
     {
       "constant": false,
@@ -98,8 +92,7 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function",
-      "signature": "0x861fc1e9"
+      "type": "function"
     },
     {
       "constant": false,
@@ -117,8 +110,7 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function",
-      "signature": "0xf1215d25"
+      "type": "function"
     },
     {
       "constant": false,
@@ -132,8 +124,7 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function",
-      "signature": "0x83b24c52"
+      "type": "function"
     },
     {
       "constant": false,
@@ -155,8 +146,7 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function",
-      "signature": "0x7157eb66"
+      "type": "function"
     },
     {
       "constant": false,
@@ -170,8 +160,7 @@
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function",
-      "signature": "0x67a7f3ae"
+      "type": "function"
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.5.8+commit.23d335f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"UCoinAddress\",\"type\":\"address\"}],\"name\":\"initUCoinAddress\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"groupID\",\"type\":\"uint256\"}],\"name\":\"endEvaluation\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"ucoin\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"groupID\",\"type\":\"uint256\"},{\"name\":\"points\",\"type\":\"uint256\"},{\"name\":\"name\",\"type\":\"string\"}],\"name\":\"evaluate\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"groupID\",\"type\":\"uint256\"}],\"name\":\"closeDeposit\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"amount\",\"type\":\"uint256\"},{\"name\":\"name\",\"type\":\"string\"}],\"name\":\"initEvaluation\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"groupID\",\"type\":\"uint256\"},{\"name\":\"name\",\"type\":\"string\"}],\"name\":\"deposit\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"name\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"member\",\"type\":\"address\"}],\"name\":\"memberRegistered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"groupID\",\"type\":\"uint256\"}],\"name\":\"announceGroupID\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"msg\",\"type\":\"string\"}],\"name\":\"debuggerEvent\",\"type\":\"event\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/unicss/Desktop/blockchain/ucoin/contracts/GroupEval.sol\":\"GroupEval\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/unicss/Desktop/blockchain/ucoin/contracts/GroupEval.sol\":{\"keccak256\":\"0xbd113fc1ef60f824d48b8c94225385ce0b27fb4410f39dfcb3ba4dd3e0dffd06\",\"urls\":[\"bzzr://fc01636c8b252667b9694152ef51893f7ee2270ea82258a85e224d45500a8e1c\"]},\"/home/unicss/Desktop/blockchain/ucoin/contracts/UCoin.sol\":{\"keccak256\":\"0x3d49d57a672760ee43189d1b0936ceed5d05f6b0edc4e786131532b3a67bbec9\",\"urls\":[\"bzzr://34906af37ea5d4ec003fca7a31a321daa2595c218f8d49e5dcdffb647e481e81\"]},\"openzeppelin-solidity/contracts/math/SafeMath.sol\":{\"keccak256\":\"0xc2a200a877c4a9b2475c246c54ffecc69ffde3e11af83319c63c2dc5458bac80\",\"urls\":[\"bzzr://c8876e2c39b60f155d748d71d715c8f3903fae5a405ac599adcb6ad2f9a583f9\"]},\"openzeppelin-solidity/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0x3dceb7e4aa237a56111c13f77d7efadeceda7271d62bfac94ac79afab7c1f411\",\"urls\":[\"bzzr://2f34152a5bec385352002c31bc89f5e9935f628f1923ccea45c2281e0084a4db\"]},\"openzeppelin-solidity/contracts/token/ERC20/ERC20Detailed.sol\":{\"keccak256\":\"0xa60f7f7ce98ca2d75c8e02da982d3fe91176269fdab2589bbbb7cc65f2d7c9d3\",\"urls\":[\"bzzr://5edd2c9be304a1e8ed055e243daba5345f242008164f9a0565c33197b860323b\"]},\"openzeppelin-solidity/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x59e7df16169a498cb8837963b2f5461d88e63bd1eb6c7d58b814d76b84ccbe61\",\"urls\":[\"bzzr://e572c9c4e02e37349702451bf3b5dcbbc86a19da5a51695b5b3e1bfe1e7825dc\"]}},\"version\":1}",
@@ -19187,12 +19176,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x5Ea0fe80324436Bf16aB99450ED8fB26Ff3C66B9",
-      "transactionHash": "0x5bd144bcddb6fc36b34c3170c2e689b07540c7d0e1c1a872805070562d310f2a"
+      "address": "0x9bDf96d1b79F8F01B575948abF4A130C2a4bE571",
+      "transactionHash": "0x311a7ba1942eaa228d124f6c15d4c5d7b679d171c2ea53f17d458e83f7755a13"
     }
   },
-  "schemaVersion": "3.0.6",
-  "updatedAt": "2019-05-12T13:55:50.565Z",
+  "schemaVersion": "3.0.9",
+  "updatedAt": "2019-05-17T02:59:40.545Z",
   "devdoc": {
     "methods": {}
   },
