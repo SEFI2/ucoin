@@ -1,0 +1,19 @@
+
+
+const GroupEvalContract = artifacts.require('./GroupEval.sol');
+const UCoinContract = artifacts.require('./UCoin.sol');
+
+contract('GroupEval', async (accounts) => {
+		const UCoin = await UCoinContract.deployed()
+		const GroupEval = await GroupEvalContract.deployed()
+		
+		it("should init UCoin address", async () => {
+			await GroupEval.initUCoinAddress(UCoin.address)
+		});
+			
+		it('init evaluation', async () =>  {
+			await GroupEval.initEvaluation(123, 'kadyr')
+		});
+
+
+});

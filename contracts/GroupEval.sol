@@ -118,7 +118,7 @@ contract GroupEval {
 
 		require (getBalance(msg.sender) >= g.depositAmount, "Balance must be greater than depositAmount");
 		require(receiveToken(msg.sender, g.depositAmount), "Cannot receiveToken");
-		require (findStudentName(g, name) == -1, "Member is already registered");
+		//require (findStudentName(g, name) == -1, name);
 
 		Member memory member = Member(name, msg.sender, 0, 0);
 		groupTable[groupID].memberList[g.memberCurIdx] = member;
@@ -151,6 +151,7 @@ contract GroupEval {
 		g.exists = true;
 		groupTable[groupID] = g;
 		
+		//registerMember(groupID, name);		
 		require(registerMember(groupID, name), "Cannot register the member");	
 		
 		emit announceGroupID(groupID);	

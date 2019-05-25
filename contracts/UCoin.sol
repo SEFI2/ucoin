@@ -43,8 +43,13 @@ contract UCoin is ERC20, ERC20Detailed {
 	function receiveToken(address spender, uint256 amount) 
 		ifSuperUser 
 		public returns (bool) {
-		_approve(msg.sender, spender, amount);
-		return transferFrom(spender, msg.sender, amount);
+		_transfer(spender, msg.sender, amount);
+		return true;
 	}
 
 }
+
+
+
+
+
