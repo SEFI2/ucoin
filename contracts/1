@@ -223,7 +223,7 @@ contract GroupEval {
 
 		// check if the sender of points can sent
 		// requested amount of points
-		require(points + pointsSender.sentPoints <= g.maxPointsToUse, "exceeds max points to use");
+		require(points + pointsSender.sentPoints < g.maxPointsToUse);
 		
 		// check if the receiver exists with given name
 		int pointsReceiverIdx = findStudentName(g, name);
@@ -245,19 +245,8 @@ contract GroupEval {
 	{
 		Group storage g = groupTable[groupID];
 		
-		uint256 totalDeposit = g.depositAmount.mul(g.memberCurIdx);
-		uint256 totalPoints = 0;
-
 		for (uint i = 0 ; i < g.memberCurIdx ; ++i) {
-			totalPoints += g.memberList[i].sentPoints;
-		}
-		
-		for (uint i = 0 ; i < g.memberCurIdx ; ++i) {
-			Member memory m = g.memberList[i];
-			if (m.receivedPoints == 0)
-				continue;
-			uint256 amountToSend = totalDeposit.mul(m.receivedPoints).div(totalPoints);
-			sendToken(g.memberList[i].addr, amountToSend); 
+			sendToken(g.memberList[i].addr, g.depositAmount); 
 		}	
 		
 		for (uint i = 0 ; i < g.memberCurIdx ; ++i) {
