@@ -27,13 +27,13 @@ class DepositComponent extends Component {
 
 	handleDeposit (event) {
 		event.preventDefault();
-		const depositAmount = this.state['depositAmount'].type === 'bytes32' ?
-							  this.utils.toHex(this.state['depositAmount']) :
-							  this.state['depositAmount']
+		const groupID = this.state['groupID'].type === 'bytes32' ?
+							  this.utils.toHex(this.state['groupID']) :
+							  this.state['groupID']
 		const memberName = this.state['memberName'].type === 'bytes32' ?
 						   this.utils.toHex(this.state['memberName']) :
 						   this.state['memberName']
-		return this.groupEvalContract.methods['initEvaluation'].cacheSend(depositAmount, memberName)
+		return this.groupEvalContract.methods['deposit'].cacheSend(groupID, memberName)
 	}
 	
 		
@@ -57,7 +57,7 @@ class DepositComponent extends Component {
 					key='deposit'
 					className='pure-button'
 					type='button'
-					onClick={this.handleInitEvaluation}
+					onClick={this.handleDeposit}
 				>
 					deposit
 				</button>
