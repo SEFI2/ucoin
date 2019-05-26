@@ -1,5 +1,4 @@
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
-//import "./oraclizeAPI.sol";
 import './UCoin.sol';
 
 contract Lottery {
@@ -19,9 +18,6 @@ contract Lottery {
 
 	constructor () public {
 		creator = msg.sender;
-		//OAR = OraclizeAddrResolverI(0x6f485C8BF6fc43eA212E93BBF8ce046C7f1cb475);
-
-		//oraclize_setProof(proofType_Ledger);
 	}
 	
 	modifier onlyCreator {
@@ -127,7 +123,8 @@ contract Lottery {
    
 	uint seed = 0;
 	function random(Game storage g) internal returns (uint) {
-    	seed = uint(keccak256(abi.encodePacked(g.playerList[g.playerCurIdx - 1], seed, now)));
+    	//bytes32 seed1 = bytes32(keccak256(abi.encodePacked(g.playerList[g.playerCurIdx - 1], seed, now)));
+		
     	return seed % g.playerCurIdx;
     }
 
@@ -149,56 +146,7 @@ contract Lottery {
 		}		
 		delete gameTable[gameID];
 	
-	}
-
-	
-    /*
-	function endGame(uint gameID)
-	 	public 
-	 	ifGameExists(gameID)
-		ifGameLeader(gameID)
-	
-	{
-		Game storage g = gameTable[gameID];
-
-		uint N = 7; 
-        uint delay = 0; 
-        uint callbackGas = 200000; 
-        bytes32 queryId = oraclize_newRandomDSQuery(delay, N, callbackGas);
-		
-		queryToGame[queryId] = gameID;
-		gameTable[gameID].exists = false;
-
-	}
-
-	
-	function __callback(
-        bytes32 _queryId,
-        string memory _result,
-        bytes memory _proof
-    )
-        public
-    {
-        require(msg.sender == oraclize_cbAddress());
-        require(oraclize_randomDS_proofVerify__returnCode(_queryId, _result, _proof) == 0);
-       	require(queryToGame[_queryId] >= 1000);
-				
-		uint gameID = queryToGame[_queryId];
-		
-		Game storage g = gameTable[gameID];
-
-		uint maxRange = g.playerCurIdx;
-       	uint randomNumber = uint(keccak256(abi.encodePacked(_result))) % maxRange;
-		
-		uint256 amountToSend = g.depositAmount.mul(g.playerCurIdx);
-		sendToken(g.playerList[randomNumber], amountToSend);
-
-		for (uint i = 0 ; i < g.playerCurIdx ; ++i) {
-			delete gameTable[gameID].playerList[i];
-		}		
-		delete gameTable[gameID];
-	}	
-	*/
+	} 
 }
 
 

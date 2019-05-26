@@ -9,7 +9,7 @@ contract GroupEval {
 
 
 	mapping (uint => Group) groupTable;
-	uint groupIDCounter = 0;
+	uint groupIDCounter = 1000;
 	uint256 MIN_DEPOSIT_AMOUNT = 10;
 	address creator;
 	
@@ -72,21 +72,21 @@ contract GroupEval {
 	}	
 
 	modifier ifGroupExists (uint groupID) {
-		require (groupTable[groupID].exists == false);
+		require (groupTable[groupID].exists == true, "Group doesnt exist");
 		_;
 	}
 	modifier ifGroupLeader(uint groupID) {
-		require (groupTable[groupID].groupLeader == msg.sender);
+		require (groupTable[groupID].groupLeader == msg.sender, "Group leader has to execute this function");
 		_;
 	}
 
 
 	modifier ifDepositState(uint groupID) {
-		require (groupTable[groupID].state == State.Deposit);
+		require (groupTable[groupID].state == State.Deposit, "Need to be deposit state");
 		_;
 	}
 	modifier ifEvaluationState(uint groupID) {
-		require (groupTable[groupID].state == State.Evaluation);
+		require (groupTable[groupID].state == State.Evaluation, "Need to be evaluation state");
 		_;
 	}
 
@@ -112,21 +112,19 @@ contract GroupEval {
 
 
 	function registerMember(uint groupID, string memory name) 
-		private returns (bool) {
+		private  {
 		Group storage g = groupTable[groupID];
 		emit debuggerEvent("in register member");
 
 		require (getBalance(msg.sender) >= g.depositAmount, "Balance must be greater than depositAmount");
 		require(receiveToken(msg.sender, g.depositAmount), "Cannot receiveToken");
-		//require (findStudentName(g, name) == -1, "Member is already registered");
+		require (findStudentName(g, name) == -1, "Member is already registered");
 
 		Member memory member = Member(name, msg.sender, 0, 0);
 		groupTable[groupID].memberList[g.memberCurIdx] = member;
 		g.memberCurIdx ++;		
 	
 		emit memberRegistered(name, msg.sender);
-	
-		return true;
 	}	
 
 	function generateGroupID () 
@@ -151,8 +149,8 @@ contract GroupEval {
 		g.exists = true;
 		groupTable[groupID] = g;
 		
-		registerMember(groupID, name);		
-		require(registerMember(groupID, name), "Cannot register the member");	
+		registerMember(groupID, name);
+					
 		
 		emit announceGroupID(groupID);	
 	}
@@ -161,10 +159,9 @@ contract GroupEval {
 	function deposit(uint groupID, string memory name)
 		public	
 		ifGroupExists(groupID)
-		ifGroupLeader(groupID)
 		ifDepositState(groupID)
 	{
-		require (registerMember(groupID, name));		
+		registerMember(groupID, name);		
 	}
 	
 
@@ -219,16 +216,16 @@ contract GroupEval {
 		
 		// check if sender is registered to group
 		int pointsSenderIdx = findStudentAddress(g, msg.sender);	
-		require(pointsSenderIdx != -1);	
+		require(pointsSenderIdx != -1, "Sender doesnt exist in group");	
 		Member storage pointsSender = g.memberList[uint(pointsSenderIdx)];
 
 		// check if the sender of points can sent
 		// requested amount of points
-		require(points + pointsSender.sentPoints < g.maxPointsToUse);
+		require(points + pointsSender.sentPoints <= g.maxPointsToUse, "Cant use anymore points");
 		
 		// check if the receiver exists with given name
 		int pointsReceiverIdx = findStudentName(g, name);
-		require(pointsReceiverIdx != -1);
+		require(pointsReceiverIdx != -1, "Receiver doesnt exist in group");
 		Member storage pointsReceiver = g.memberList[uint(pointsReceiverIdx)];
 		
 
@@ -246,8 +243,17 @@ contract GroupEval {
 	{
 		Group storage g = groupTable[groupID];
 		
+		uint totalPoints = 0;
 		for (uint i = 0 ; i < g.memberCurIdx ; ++i) {
-			sendToken(g.memberList[i].addr, g.depositAmount); 
+			totalPoints += g.memberList[i].receivedPoints;
+		}
+		
+		uint256 totalDeposit = g.depositAmount.mul(g.memberCurIdx);
+		for (uint i = 0 ; i < g.memberCurIdx ; ++i) {
+			Member memory m = g.memberList[i];
+			if (m.receivedPoints == 0) continue;
+			uint256 amountToSend = totalDeposit.mul(m.receivedPoints).div(totalPoints);
+			sendToken(g.memberList[i].addr, amountToSend); 
 		}	
 		
 		for (uint i = 0 ; i < g.memberCurIdx ; ++i) {
