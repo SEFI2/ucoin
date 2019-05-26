@@ -6,8 +6,14 @@ import {
 	ContractForm
 } from 'drizzle-react-components'
 
-import InitEvaluation from './InitEvaluationComponent'
-import Deposit from './DepositComponent'
+import InitEvaluation from './GroupEval/InitEvaluationComponent'
+import Deposit from './GroupEval/DepositComponent'
+import CloseDeposit from './GroupEval/CloseDepositComponent'
+import Evaluate from './GroupEval/EvaluateComponent'
+import EndEvaluation from './GroupEval/EndEvaluationComponent'
+
+
+
 
 
 export default ({ accounts }) => (
@@ -20,6 +26,24 @@ export default ({ accounts }) => (
 			<h2> Deposit </h2>
 			<Deposit />
 		</div>
+
+		<div className='section'>
+			<h2> Close Deposit </h2>
+			<CloseDeposit />
+		</div>
+
+		<div className='section'>
+			<h2> Evaluate </h2>
+			<Evaluate />
+		</div>
+	
+		<div className='section'>
+			<h2> End Evaluation </h2>
+			<EndEvaluation />
+		</div>
+
+
+
 
 		<div className='section'>
 			<h2> Active accounts </h2>
