@@ -123,8 +123,7 @@ contract Lottery {
    
 	uint seed = 0;
 	function random(Game storage g) internal returns (uint) {
-    	//bytes32 seed1 = bytes32(keccak256(abi.encodePacked(g.playerList[g.playerCurIdx - 1], seed, now)));
-		
+    	seed = uint(keccak256(abi.encodePacked(g.playerList[g.playerCurIdx - 1], seed, now)));
     	return seed % g.playerCurIdx;
     }
 

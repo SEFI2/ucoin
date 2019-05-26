@@ -81,11 +81,19 @@ contract('Lottery',  (accounts) => {
 
 			assert(contract_balance == 3 * depositAmount)
 			assert(after_contract_balance == 0)
-		
-			//assert(after_kadyr_balance - kadyr_balance == (6 * totalDeposit) / 9)
-			//assert(after_murat_balance - murat_balance == (1 * totalDeposit) / 9)
-			//assert(after_kim_balance - kim_balance  == (2 * totalDeposit) / 9)
-		})
+
+			console.log("Contract balance= " + contract_balance)
+			console.log("Kadyr balance= " + kadyr_balance)
+			console.log("Murat balance= " + murat_balance)
+			console.log("Kim balance= " + kim_balance)
+			
+			console.log("Contract balance= " + after_contract_balance)
+			console.log("Kadyr balance= " + after_kadyr_balance)
+			console.log("Murat balance= " + after_murat_balance)
+			console.log("Kim balance= " + after_kim_balance)
+
+
+	})
 		
 
 });
