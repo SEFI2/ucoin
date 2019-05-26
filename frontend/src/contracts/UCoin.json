@@ -4015,12 +4015,12 @@
         }
       },
       "links": {},
-      "address": "0x3CC188DE3e308FAcC55969B450ef8a518547e804",
-      "transactionHash": "0x140ed7898e9f72ea5617e9a994c4a50854d290ebb153521f514f1b67e9b7d5a2"
+      "address": "0x5b6736c5A267B9C82a2e4a3e9ab0F8F7a666Be18",
+      "transactionHash": "0xbed97991ea4ad0e21b35c8e5b6b6e293e881b03b909c391d54c075f2ff23e7a1"
     }
   },
   "schemaVersion": "3.0.9",
-  "updatedAt": "2019-05-26T14:35:57.689Z",
+  "updatedAt": "2019-05-26T16:49:53.518Z",
   "devdoc": {
     "methods": {
       "allowance(address,address)": {
