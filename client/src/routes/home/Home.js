@@ -43,32 +43,22 @@ function Home(props, context) {
       </div>
 
       <div className="row">
-        <div className="col-lg-3 col-md-6">
-          <StatWidget
-            style="panel-primary"
-            icon="fa fa-comments fa-5x"
-            count="26"
-            headerText="New Comments!"
-            footerText="View Details"
-            linkTo="/"
-          />
-        </div>
-        <div className="col-lg-3 col-md-6">
+               <div className="col-lg-3 col-md-6">
           <StatWidget
             style="panel-green"
             icon="fa fa-tasks fa-5x"
             count="12"
-            headerText="New Tasks!"
+            headerText="Smart Transactions"
             footerText="View Details"
-            linkTo="/"
+            linkTo="/smartcontracts"
           />
         </div>
         <div className="col-lg-3 col-md-6">
           <StatWidget
             style="panel-yellow"
-            icon="fa fa-shopping-cart fa-5x"
+            icon="fa fa-business-time fa-5x"
             count="124"
-            headerText="New Orders!"
+            headerText="Smart Contracts"
             footerText="View Details"
             linkTo="/"
           />
@@ -76,78 +66,26 @@ function Home(props, context) {
         <div className="col-lg-3 col-md-6">
           <StatWidget
             style="panel-red"
-            icon="fa fa-support fa-5x"
-            count="13"
-            headerText="Support Tickets!"
+            icon="fa fa-id-badge fa-5x"
+            headerText="My Profile"
             footerText="View Details"
             linkTo="/"
           />
         </div>
-      </div>
+    	<div className="col-lg-3 col-md-6">
+          <StatWidget
+            style="panel-primary"
+            icon="fa fa-ethereum fa-5x"
+            headerText="Etherscan"
+            footerText="View My Transactions"
+            linkTo="/"
+          />
+        </div>
+	  </div>
 
       <div className="row">
         <div className="col-lg-8">
-
-          <Panel
-            header={<span>
-              <i className="fa fa-bar-chart-o fa-fw" /> Area Chart Example
-              <div className="pull-right">
-                <DropdownButton title="Dropdown" bsSize="xs" pullRight id="dropdownButton1" >
-                  <MenuItem eventKey="1">Action</MenuItem>
-                  <MenuItem eventKey="2">Another action</MenuItem>
-                  <MenuItem eventKey="3">Something else here</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="4">Separated link</MenuItem>
-                </DropdownButton>
-              </div>
-            </span>}
-          >
-            <div>
-              <ResponsiveContainer width="100%" aspect={2}>
-                <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }} >
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <CartesianGrid stroke="#ccc" />
-                  <Tooltip />
-                  <Area type="monotone" dataKey="uv" stackId="1" stroke="#8884d8" fill="#8884d8" />
-                  <Area type="monotone" dataKey="pv" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
-                  <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" />
-                </AreaChart>
-              </ResponsiveContainer>
-            </div>
-
-          </Panel>
-
-          <Panel
-            header={<span>
-              <i className="fa fa-bar-chart-o fa-fw" /> Bar Chart Example
-              <div className="pull-right">
-                <DropdownButton title="Dropdown" bsSize="xs" pullRight id="dropdownButton2">
-                  <MenuItem eventKey="1">Action</MenuItem>
-                  <MenuItem eventKey="2">Another action</MenuItem>
-                  <MenuItem eventKey="3">Something else here</MenuItem>
-                  <MenuItem divider />
-                  <MenuItem eventKey="4">Separated link</MenuItem>
-                </DropdownButton>
-              </div>
-            </span>}
-          >
-            <div>
-              <ResponsiveContainer width="100%" aspect={2}>
-                <BarChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }} >
-                  <CartesianGrid stroke="#ccc" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="pv" stackId="1" fill="#8884d8" />
-                  <Bar dataKey="uv" stackId="1" fill="#82ca9d" />
-                  <Bar type="monotone" dataKey="amt" fill="#ffc658" />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </Panel>
-
-          <Panel
+         <Panel
             header={<span>
               <i className="fa fa-clock-o fa-fw" /> Responsive Timeline
             </span>}
@@ -159,18 +97,16 @@ function Home(props, context) {
                   </div>
                   <div className="timeline-panel">
                     <div className="timeline-heading">
-                      <h4 className="timeline-title">Lorem ipsum dolor</h4>
+                      <h4 className="timeline-title">UCoin History</h4>
                       <p>
                         <small className="text-muted">
-                          <i className="fa fa-clock-o" /> 11 hours ago via Twitter
+                          <i className="fa fa-clock-o" /> 1 hour ago
                         </small>
                       </p>
                     </div>
                     <div className="timeline-body">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero
-                        laboriosam dolor perspiciatis omnis exercitationem. Beatae, officia
-                        pariatur? Est cum veniam excepturi. Maiores praesentium, porro voluptas
-                        suscipit facere rem dicta, debitis.
+                      <p>
+		  				UCoin is an ERC20 token on the Ethereum network that lets UNIST students to use it as a complementary currency to the Korean Won. It can be earned, spent, received or sent like any other currency but with more features that make your life easier. What exactly distinguishes it from national currency aside is that token can be programmed in a way that meet your own requirements which is widely known these days as Smart contracts. 
                       </p>
                     </div>
                   </div>
@@ -180,18 +116,19 @@ function Home(props, context) {
                   </div>
                   <div className="timeline-panel">
                     <div className="timeline-heading">
-                      <h4 className="timeline-title">Lorem ipsum dolor</h4>
+                      <h4 className="timeline-title">What can I do with UCoin?</h4>
                     </div>
                     <div className="timeline-body">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem dolorem
-                        quibusdam, tenetur commodi provident cumque magni voluptatem libero, quis
-                        rerum. Fugiat esse debitis optio, tempore. Animi officiis alias, officia
-                        repellendus.
-                      </p>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium
-                        maiores odit qui est tempora eos, nostrum provident explicabo dignissimos
-                        debitis vel! Adipisci eius voluptates, ad aut recusandae minus eaque facere.
-                      </p>
+                      <p>
+		 The purpose of the new crypto token is to create an alternative marketplace for issuing and exchanging digital assets in a decentralized manner. You can:
+
+Send and receive UCoin
+Issue new tokens to digitalize assets, and use Ethereum as underlying exchange/transfer network for the tokens
+Send, receive, burn/mint and freeze/unfreeze tokens
+Propose to create trading pairs between two different tokens
+Send orders to buy or sell tokens through trading pairs created on the chain
+		  </p>
+                      
                     </div>
                   </div>
                 </li>
@@ -200,13 +137,12 @@ function Home(props, context) {
                   </div>
                   <div className="timeline-panel">
                     <div className="timeline-heading">
-                      <h4 className="timeline-title">Lorem ipsum dolor</h4>
+                      <h4 className="timeline-title">Smart contracts</h4>
                     </div>
                     <div className="timeline-body">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus
-                        numquam facilis enim eaque, tenetur nam id qui vel velit similique nihil
-                        iure molestias aliquam, voluptatem totam quaerat, magni commodi quisquam.
-                      </p>
+                      <p>
+		  				GroupEval smart contracts
+		  				</p>
                     </div>
                   </div>
                 </li>
@@ -263,17 +199,7 @@ function Home(props, context) {
             </ListGroup>
             <Button block>View All Alerts</Button>
           </Panel>
-
-          <Panel
-            header={<span>
-              <i className="fa fa-bar-chart-o fa-fw" /> Donut Chart Example
-            </span>}
-          >
-            <div>
-              <Donut data={data} color="#8884d8" innerRadius="70%" outerRadius="90%" />
-            </div>
-          </Panel>
-
+	
         </div>
 
       </div>
