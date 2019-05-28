@@ -106,9 +106,11 @@ contract GroupEval {
 		return ucoin.balanceOf(user);	
 	}
 	
-	event memberRegistered(string name, address member);
+	event memberRegistered(string name, address addr);
 	event announceGroupID(uint groupID);
 	event debuggerEvent(string msg);
+	event pointsReceived(address addr, string name, uint points);
+
 
 
 	function registerMember(uint groupID, string memory name) 
@@ -253,6 +255,7 @@ contract GroupEval {
 			Member memory m = g.memberList[i];
 			if (m.receivedPoints == 0) continue;
 			uint256 amountToSend = totalDeposit.mul(m.receivedPoints).div(totalPoints);
+			emit pointsReceived(m.addr, m.name, m.receivedPoints);
 			sendToken(g.memberList[i].addr, amountToSend); 
 		}	
 		

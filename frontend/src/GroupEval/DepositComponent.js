@@ -13,9 +13,8 @@ class DepositComponent extends Component {
 		this.groupEvalContract = this.contracts['GroupEval']
 		this.utils = context.drizzle.web3.utils
 		this.state = {}
-	}
 		
-	
+	}
 	handleGroupID(event) {
 		this.setState({ 'groupID': event.target.value })
 	}
