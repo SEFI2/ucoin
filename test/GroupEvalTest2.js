@@ -20,7 +20,6 @@ contract('GroupEval',  (accounts) => {
 
 		it("should transfer tokesn", async() => {
 			//await UCoin.transfer(accounts[1], 10000)
-			//await UCoin.transfer(accounts[2], 10000)
 		})
 
 	
@@ -47,19 +46,15 @@ contract('GroupEval',  (accounts) => {
 		it("should deposit to contract", async() => {
 			const contract_balance = parseInt(await UCoin.balanceOf(GroupEval.address))
 			const murat_balance = parseInt(await UCoin.balanceOf(accounts[1]))
-			const kim_balance = parseInt(await UCoin.balanceOf(accounts[2]))
 
 			await GroupEval.deposit(groupID, "murat", {from: accounts[1]})
-			await GroupEval.deposit(groupID, "kim", {from: accounts[2]})
 			
 			const after_contract_balance = parseInt(await UCoin.balanceOf(GroupEval.address))
 			const after_murat_balance = parseInt(await UCoin.balanceOf(accounts[1]))
-			const after_kim_balance = parseInt(await UCoin.balanceOf(accounts[2]))
 			
-			assert (contract_balance == after_contract_balance - 2 * depositAmount)
+			assert (contract_balance == after_contract_balance - 1 * depositAmount)
 		
 			assert (murat_balance == after_murat_balance + depositAmount)
-			assert (kim_balance == after_kim_balance + depositAmount)
 	
 		})
 
@@ -70,13 +65,8 @@ contract('GroupEval',  (accounts) => {
 		it("should evaluate", async() => {
 			await GroupEval.evaluate(groupID, 1, "kadyr") // kadyr
 			await GroupEval.evaluate(groupID, 1, "murat") // kadyr
-			await GroupEval.evaluate(groupID, 1, "kim") // kadyr
 	
-			await GroupEval.evaluate(groupID, 2, "kadyr", {from: accounts[1]}) // murat
-			await GroupEval.evaluate(groupID, 1, "kim", {from: accounts[1]}) // murat
-
-			await GroupEval.evaluate(groupID, 3, "kadyr", {from: accounts[2]}) // kim
-													
+			await GroupEval.evaluate(groupID, 2, "kadyr", {from: accounts[1]}) // murat	
 		})
 		
 		it("should end evaluation", async() => {
@@ -84,7 +74,6 @@ contract('GroupEval',  (accounts) => {
 
 			const kadyr_balance = parseInt(await UCoin.balanceOf(accounts[0]))
 			const murat_balance = parseInt(await UCoin.balanceOf(accounts[1]))
-			const kim_balance = parseInt(await UCoin.balanceOf(accounts[2]))
 		
 			await GroupEval.endEvaluation(groupID)		
 			
@@ -92,16 +81,29 @@ contract('GroupEval',  (accounts) => {
 			
 			const after_kadyr_balance = parseInt(await UCoin.balanceOf(accounts[0]))
 			const after_murat_balance = parseInt(await UCoin.balanceOf(accounts[1]))
-			const after_kim_balance = parseInt(await UCoin.balanceOf(accounts[2]))
 			
-			const totalDeposit = depositAmount * 3
+			const totalDeposit = depositAmount * 2
 
-			assert(contract_balance == 3 * depositAmount)
-			assert(after_contract_balance == 0)
-		
-			assert(after_kadyr_balance - kadyr_balance == (6 * totalDeposit) / 9)
-			assert(after_murat_balance - murat_balance == (1 * totalDeposit) / 9)
-			assert(after_kim_balance - kim_balance  == (2 * totalDeposit) / 9)
+			assert(contract_balance == 2 * depositAmount)
+			//assert(after_contract_balance == 0)
+			
+			console.log("Contract balance= ", contract_balance)
+			console.log("After Contract balance= ", after_contract_balance)
+			
+			console.log("Kadyr balance= ", kadyr_balance)
+			console.log("After Kadyr balance= ", after_kadyr_balance)
+			console.log("Kadyr received = ", after_kadyr_balance - kadyr_balance)
+		    console.log("Kadyr need to receive = ", (3 * totalDeposit) / 4)
+
+
+
+			console.log("Murate balance= ", murat_balance)
+			console.log("After Murate balance= ", after_murat_balance)
+			console.log("Murat received = ", after_murat_balance - murat_balance)
+			console.log("Kadyr need to receive = ", (1 * totalDeposit) / 4)
+
+			//assert(after_kadyr_balance - kadyr_balance == (3 * totalDeposit) / 4)
+			//assert(after_murat_balance - murat_balance == (1 * totalDeposit) / 4)
 		})
 		
 

@@ -19,8 +19,8 @@ contract('Lottery',  (accounts) => {
 
 
 		it("should transfer tokesn", async() => {
-			await UCoin.transfer(accounts[1], 10000)
-			await UCoin.transfer(accounts[2], 10000)
+//			await UCoin.transfer(accounts[1], 10000)
+//			await UCoin.transfer(accounts[2], 10000)
 		})
 
 	
