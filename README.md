@@ -1,3 +1,20 @@
+# HOW TO RUN
+Open terminal and run ganache
+```
+ganache-cli -i 5777 -p 7545
+```
+
+In /ucoin directory, execute
+```
+ truffle migrate --reset
+```
+
+In /ucoin/frontend direcotry, execute
+```
+  npm start
+```
+
+
 # Business Model for a New Crypto Token - UCoin
 ## Description
 This project briefly explains the business model of a new crypto token being created at Intelligent Enterprise Lab at Ulsan National Institute of Science & Technology (UNIST) with a purpose of adding comfortability and convenience for stakeholders in transferring, exchanging or simply buying/selling any goods between each other, and if needed, deploy Smart contracts to set their own conditions. It also describes the parties involved in the university environment, their interest in adapting the new crypto token, the advantages of using Smart contracts, and the other functionalities of crypto tokens. 
