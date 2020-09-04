@@ -40,7 +40,7 @@
     "react-chartjs": "^0.8.0",
     "react-dom": "15.3.1",
     "recharts": "^0.15.1",
-    "sequelize": "3.24.1",
+    "sequelize": "6.3.5",
     "source-map-support": "0.4.2",
     "sqlite3": "3.1.4",
     "universal-router": "1.2.2",
